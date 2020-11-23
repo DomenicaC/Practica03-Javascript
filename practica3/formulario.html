@@ -3,9 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario</title>
+    <script type="text/javascript" src="validaciones.js"></script>
+    <style type="text/css">
+        .error {
+            color: red;
+            font-size: 8px;
+        }
+    </style>
 </head>
 <body>
-    
+    <form id="formulario01" method="POST" action="" onsubmit="return validarCamposObligatorios()">
+
+        <label for="cedula">Cedula (*)</label>
+        <input type="text" id="cedula" name="cedula" value="" placeholder="Ingrese su número de cédula" onkeyup="return validarCamposObligatorios(this)" />
+        <span id="mensajeCedula" class="error"></span>
+        <br>
+
+        <label for="nombres">Nombres (*)</label>
+        <input type="text" id="cedula" name="cedula" value="" placeholder="Ingrese sus dos nombres"
+            onkeyup="return validarLetras(this)" />
+        <span id="mensajeNoombres" class="error"></span>
+        <br>
+
+        <label for="apellidos">Apellidos (*)</label>
+        <input type="text" id="apellidos" name="apellidos" value="" placeholder="Ingrese sus dos apellidos"
+            onkeyup="return validarLetras(this)" />
+        <span id="mensajeApellidos" class="error"></span>
+        <br>
+
+        <label for="direccion">Direccion (*)</label>
+        <input type="text" id="direccion" name="direccion" value="" placeholder="Ingrese su dirección" />
+        <span id="mensajeDirecion" class="error"></span>
+        <br>
+
+        <label for="telefono">Telefono (*)</label>
+        <input type="text" id="telefono" name="telefono" value="" placeholder="Ingrese su telefono" />
+        <span id="mensajeTelefono" class="error"></span>
+        <br>
+
+        <label for="fecha">Fecha Nacimiento (*)</label>
+        <input type="text" id="fecha" name="fecha" value="" placeholder="Ingrese su fecha de nacimiento" />
+        <span id="mensajeFecha" class="error"></span>
+        <br>
+
+        <label for="correo">Correo Electrónico (*)</label>
+        <input type="text" id="correo" name="correo" value="" placeholder="Ingrese su correo electrónico" />
+        <span id="mensajeCorreo" class="error"></span>
+        <br>
+
+        <label for="contrasena">Contraseña (*)</label>
+        <input type="text" id="contrasena" name="contrasena" value="" placeholder="Ingrese su contraseña" />
+        <span id="mensajeContrasena" class="error"></span>
+        <br>
+
+        <input type="submit" id="crear" name="crear" value="Aceptar" />
+        <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
+    </form>
 </body>
 </html>
