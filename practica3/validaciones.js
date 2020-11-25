@@ -156,3 +156,33 @@ function validarNombres(elemento) {
         return false
     }
 }
+
+function validarApellidos(elemento) {
+    document.getElementById('mensajeApellidos').innerHTML = ''
+    if (elemento.value.length > 0) {
+        document.getElementById('mensajeApellidos').innerHTML = ''
+        var miAscii = elemento.value.charCodeAt(elemento.value.length - 1)
+        console.log(miAscii)
+        var j = 0
+        var espacio1 = elemento.value.indexOf(' ')
+        if (miAscii >= 97 && miAscii <= 122 || miAscii >= 65 && miAscii <= 90 || miAscii == 32) {
+            if (espacio1 != -1) {
+                if (miAscii != 32) {
+                    j = j + 1
+                    console.log("j " + j)
+                    if (j <= 1) {
+                        return true
+                    }
+                } else {
+                    document.getElementById('mensajeApellidos').innerHTML = '<br>El campo debe contener dos apellidos'
+                    return false
+                }
+            } else {
+                document.getElementById('mensajeApellidos').innerHTML = '<br>El campo debe contener dos apellidos'
+                return false
+            }
+        }
+    } else {
+        return false
+    }
+}
