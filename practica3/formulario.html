@@ -15,23 +15,23 @@
 </head>
 
 <body>
-    <form id="formulario01" method="POST" action="" onsubmit="return validarCamposObligatorios()">
+    <form id="formulario01" method="POST" action="accion.php" onsubmit="return validarCamposObligatorios()">
 
         <label for="cedula">Cedula (*)</label>
         <input type="text" id="cedula" name="cedula" value="" placeholder="Ingrese su número de cédula"
             onkeyup="return valCedula(this)" />
-        <span id="mensajeCedula" class="error"></span>
+        <span id="mensajeced" class="error"></span>
         <br><br>
 
         <label for="nombres">Nombres (*)</label>
         <input type="text" id="cedula" name="cedula" value="" placeholder="Ingrese sus dos nombres"
-            onkeyup="return validarLetras(this)" />
+            onkeyup="return validarNombres(this)" />
         <span id="mensajeNombres" class="error"></span>
         <br><br>
 
         <label for="apellidos">Apellidos (*)</label>
         <input type="text" id="apellidos" name="apellidos" value="" placeholder="Ingrese sus dos apellidos"
-            onkeyup="return validarLetras(this)" />
+            onkeyup="return validarApellidos(this)" />
         <span id="mensajeApellidos" class="error"></span>
         <br><br>
 
@@ -42,28 +42,31 @@
 
         <label for="telefono">Telefono (*)</label>
         <input type="text" id="telefono" name="telefono" value="" placeholder="Ingrese su telefono"
-            onkeyup="return validarNumeros(this)" />
+            onkeyup="return validarTelefono(this)" />
         <span id="mensajeTelefono" class="error"></span>
         <br><br>
 
         <label for="fecha">Fecha Nacimiento (*)</label>
-        <input type="text" id="fecha" name="fecha" value="" placeholder="Ingrese su fecha de nacimiento" />
-        <span id="mensajeFecha" class="error"></span>
+        <input type="text" id="fecha" name="fecha" value="" placeholder="Ingrese su fecha de nacimiento (dd/MM/yyyy)"
+            onkeyup="return validarFecha(this)" />
+        <span id="mensajeFechaNac" class="error"></span>
         <br><br>
 
         <label for="correo">Correo Electrónico (*)</label>
-        <input type="text" id="correo" name="correo" value="" placeholder="Ingrese su correo electrónico" />
+        <input type="text" id="correo" name="correo" value="" placeholder="Ingrese su correo electrónico"
+            onkeyup="validarCorreo(this)" />
         <span id="mensajeCorreo" class="error"></span>
         <br><br>
 
         <label for="contrasena">Contraseña (*)</label>
-        <input type="text" id="contrasena" name="contrasena" value="" placeholder="Ingrese su contraseña" />
-        <span id="mensajeContrasena" class="error"></span>
+        <input type="text" id="contrasena" name="contrasena" value="" placeholder="Ingrese su contraseña"
+            onkeyup="return validarContra(this)" />
+        <span id="mensajeContra" class="error"></span>
         <br><br>
 
         <input type="submit" id="crear" name="crear" value="Aceptar" />
         <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
-        
+
     </form>
 </body>
 
