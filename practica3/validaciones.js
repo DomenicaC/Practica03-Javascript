@@ -42,243 +42,84 @@ function validarCamposObligatorios(elemento) {
     return bandera
 }
 
-function verificar() {
-    console.clear();
+function valCedula(ced) {
+    document.getElementById('mensajeced').innerHTML = ''
 
-    let cadena = document.getElementById("cadena").value;
+    var miAscii = ced.value.charCodeAt(ced.value.length - 1)
+    console.log(miAscii)
+    if (miAscii >= 48 && miAscii <= 57) {
+        if (ced.value.length == 10) {
+            var dr = ced.value.substring(0, 2)
+            if (dr >= 0 && dr <= 24) {
+                var ud = ced.value.substring(9, 10)
+                var pares = parseInt(ced.value.substring(1, 2)) + parseInt(ced.value.substring(3, 4)) + parseInt(ced.value.substring(5, 6)) + parseInt(ced.value.substring(7, 8))
 
-    if (cadena.indexOf(" ") === -1) {
-        console.log(`\"${cadena}\" no contiene espacios`);
-    } else {
-        console.log(`\"${cadena}\" contiene al menos un espacio`);
-    }
-}
+                var n1 = ced.value.substring(0, 1)
+                var n1 = (n1 * 2)
+                if (n1 > 9) {
+                    var n1 = (n1 - 9)
+                }
 
-function validarLetras(elemento) {
+                var n3 = ced.value.substring(2, 3);
+                var n3 = (n3 * 2);
+                if (n3 > 9) {
+                    var n3 = (n3 - 9);
+                }
 
-    if (elemento.value.length > 0) {
-        document.getElementById('mensajeNombres').innerHTML = ''
-        var miAscii = elemento.value.charCodeAt(elemento.value.length - 1)
-       // console.log(miAscii)
+                var n5 = ced.value.substring(4, 5);
+                var n5 = (n5 * 2);
+                if (n5 > 9) {
+                    var n5 = (n5 - 9);
+                }
 
-        if (miAscii >= 97 && miAscii <= 122 || miAscii >= 65 && miAscii <= 90 || miAscii == 32) {
-            if (elemento.indexOf(" ") === -1) {
-                return true
+                var n7 = ced.value.substring(6, 7);
+                var n7 = (n7 * 2);
+                if (n7 > 9) {
+                    var n7 = (n7 - 9);
+                }
+
+                var n9 = ced.value.substring(8, 9);
+                var n9 = (n9 * 2);
+                if (n9 > 9) {
+                    var n9 = (n9 - 9);
+                }
+
+                var impares = n1 + n3 + n5 + n7 + n9
+
+                var sumTot = (pares + impares)
+
+                var priDigS = (sumTot).toString().substring(0, 1)
+
+                var decena = (parseInt(priDigS) + 1) * 10
+
+                var digVal = decena - sumTot
+
+                if (digVal == 10) {
+                    digVal = 0
+                }
+
+                if (digVal == ud) {
+                    return true
+                } else {
+                    document.getElementById('mensajeced').innerHTML = '<br>  La cedula es invalida'
+                    return false
+                }
             } else {
-                document.getElementById('mensajeNombres').innerHTML = '<br>El campo nombre debe contener dos nombres'
+
+                document.getElementById('mensajeced').innerHTML = '<br>  La cedula no pertenece a ninguna region'
                 return false
             }
 
         } else {
-            elemento.value = elemento.value.substring(0, elemento.value.length - 1)
-            document.getElementById('mensajeNombres').innerHTML = '<br>El campo nombre debe contener solo letras'
+
+            document.getElementById('mensajeced').innerHTML = '<br>  La cedula debe tener 10 digitos'
             return false
         }
-        /*
-                if (elemento.value.Contains(" ")) {
-                    return true
-                } else {
-                    
-                    document.getElementById('mensajeNombres').innerHTML = '<br>El campo nombre debe contener dos nombres'
-                    return false
-                }*/
-
     } else {
+        ced.value = ced.value.substring(0, ced.value.length - 1)
+        document.getElementById('mensajeced').innerHTML = '<br>El campo debe contener solo numeros'
         return false
     }
-}
-
-function validarNumeros(elemento) {
-    if (elemento.value.length > 0) {
-        var miAscii = elemento.value.charCodeAt(elemento.value.length - 1)
-        console.log(miAscii)
-
-        if (miAscii >= 48 && miAscii <= 57) {
-            if (elemento.value.length > 10) {
-                document.getElementById('mensajeTelefono').innerHTML = '<br>El campo telefono debe tener solo 10 numeros'
-            }
-            return true
-        } else {
-            elemento.value = elemento.value.substring(0, elemento.value.length - 1)
-            return false
-        }
-    } else {
-        return true
-    }
-}
-
-function validarCedula(elemento) {
-    document.getElementById('mensajeCedula').innerHTML = ''
-    if (elemento.value.length == 10) {
-        var tercerDigito = Integer.parseInt(elemento.substring(2, 3))
-        if (tercerDigito < 6) {
-            // Coeficientes de validación cédula
-            // El decimo digito se lo considera dígito verificador
-            var coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2]
-
-            var verificador = Integer.parseInt(elemento.substring(9, 10));
-            var suma = 0;
-            var digito = 0;
-            for (var i = 0; i < (elemento.length() - 1); i++) {
-                digito = Integer.parseInt(elemento.substring(i, i + 1)) * coefValCedula[i];
-                suma += ((digito % 10) + (digito / 10));
-            }
-
-            if ((suma % 10 == 0) && (suma % 10 == verificador)) {
-                cedulaCorrecta = true;
-            } else if ((10 - (suma % 10)) == verificador) {
-                cedulaCorrecta = true;
-                document.getElementById('mensajeCedula').innerHTML = ''
-            } else {
-                cedulaCorrecta = false;
-                document.getElementById('mensajeCedula').innerHTML = '<br> La cedula es incorrecta'
-            }
-        } else {
-            cedulaCorrecta = false;
-            document.getElementById('mensajeCedula').innerHTML = '<br>La cedula solo debe tener 10 digitos'
-        }
-    } else {
-        cedulaCorrecta = false;
-        document.getElementById('mensajeCedula').innerHTML = '<br>  La cedula es incorrecta'
-    }
-
-    return cedulaCorrecta;
-
-}
-
-
-function valCedula(cedula) {
-    document.getElementById('mensajeCedula').innerHTML = ''
-    if (cedula.value.length == 10) {
-        var digito_region = cedula.substring(0, 2)
-        if (digito_region >= 0 && digito_region <= 24) {
-            var ultimo_digito = cedula.substring(9, 10)
-            var pares = parseInt(cedula.substring(1, 2)) + parseInt(cedula.substring(3, 4)) + parseInt(cedula.substring(5, 6)) + parseInt(cedula.substring(7, 8))
-
-            var numero1 = cedula.substring(0, 1)
-            var numero1 = (numero1 * 2)
-            if (numero1 > 9) {
-                var numero1 = (numero1 - 9)
-            }
-
-            var numero3 = cedula.substring(2, 3);
-            var numero3 = (numero3 * 2);
-            if (numero3 > 9) {
-                var numero3 = (numero3 - 9);
-            }
-
-            var numero5 = cedula.substring(4, 5);
-            var numero5 = (numero5 * 2);
-            if (numero5 > 9) {
-                var numero5 = (numero5 - 9);
-            }
-
-            var numero7 = cedula.substring(6, 7);
-            var numero7 = (numero7 * 2);
-            if (numero7 > 9) {
-                var numero7 = (numero7 - 9);
-            }
-
-            var numero9 = cedula.substring(8, 9);
-            var numero9 = (numero9 * 2);
-            if (numero9 > 9) {
-                var numero9 = (numero9 - 9);
-            }
-
-            var impares = numero1 + numero3 + numero5 + numero7 + numero9
-
-            var suma_total = (pares + impares)
-
-            var primer_digito_suma = string(suma_total).substring(0, 1)
-
-            var decena = (parseInt(primer_digito_suma) + 1) * 10
-
-            var digito_validador = decena - suma_total
-
-            if (digito_validador == 10) {
-                digito_validador = 0
-            }
-
-            if (digito_validador == ultimo_digito) {
-                document.getElementById('mensajeCedula').innerHTML = '<br>  La cedula es valida'
-            } else {
-                document.getElementById('mensajeCedula').innerHTML = '<br>  La cedula es invalida'
-            }
-        } else {
-
-            document.getElementById('mensajeCedula').innerHTML = '<br>  La cedula no pertenece a ninguna region'
-            return false
-        }
-
-    } else {
-
-        document.getElementById('mensajeCedula').innerHTML = '<br>  La cedula debe tener 10 digitos'
-        return false
-    }
-
     return true
 }
 
-/*function validarCed2(elemento) {
-    if (elemento.value.length > 0) {
-        var total = 0
-        var longitud = cad.length
-        var longcheck = longitud - 1
-
-        if (longitud == 10) {
-            for (var i = 0; i < longcheck; i++) {
-                if (i % 2 == 0) {
-                    var aux = elemento.charAt(i) * 2
-                    if (aux > 9) {
-                        aux -= 9
-                        total += aux
-                    }
-                } else {
-                    total += parseInt(elemento.charAt(i))
-                }
-            }
-            total = total % 10 ? 10 - total % 10 : 0
-
-            if (elemento.charAt(longitud - 1) == total) {
-                document.getElementById('mensajeCedula').innerHTML = '<br>  La cedula es valida'
-                return true
-            } else {
-                document.getElementById('mensajeCedula').innerHTML = '<br>  La cedula es incorrecta'
-                return false
-            }
-        }
-    }
-
-}
-
-function validarCed1(cad) {
-    //cad = document.getElementById("ced").value.trim();
-    var total = 0;
-    var longitud = cad.length;
-    var longcheck = longitud - 1;
-
-    if (cad !== "" && longitud === 10) {
-        for (i = 0; i < longcheck; i++) {
-            if (i % 2 === 0) {
-                var aux = cad.charAt(i) * 2;
-                if (aux > 9) aux -= 9;
-                total += aux;
-            } else {
-                total += parseInt(cad.charAt(i)); // parseInt o concatenará en lugar de sumar
-            }
-        }
-
-        total = total % 10 ? 10 - total % 10 : 0;
-
-        if (cad.charAt(longitud - 1) == total) {
-            document.getElementById('mensajeCedula').innerHTML = '<br>  La cedula es valida'
-        } else {
-            document.getElementById('mensajeCedula').innerHTML = '<br>  La cedula es incorrecta'
-        }
-    }
-}*/
-
-
-function validarFecha() {
-
-}
