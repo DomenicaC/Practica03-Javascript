@@ -186,3 +186,27 @@ function validarApellidos(elemento) {
         return false
     }
 }
+
+function validarTelefono(elemento) {
+    if (elemento.value.length > 0) {
+        document.getElementById('mensajeTelefono').innerHTML = ''
+        var miAscii = elemento.value.charCodeAt(elemento.value.length - 1)
+        console.log(miAscii)
+
+        if (miAscii >= 48 && miAscii <= 57) {
+            if (elemento.value.length == 10) {
+                return true
+            } else {
+                document.getElementById('mensajeTelefono').innerHTML = '<br>El campo telefono debe tener solo 10 numeros'
+                return false
+            }
+        } else {
+            elemento.value = elemento.value.substring(0, elemento.value.length - 1)
+            document.getElementById('mensajeTelefono').innerHTML = '<br>El campo debe contener solo numeros'
+            return false
+        }
+    } else {
+        document.getElementById('mensajeTelefono').innerHTML = '<br>El campo telefono debe tener solo 10 numeros'
+        return false
+    }
+}
