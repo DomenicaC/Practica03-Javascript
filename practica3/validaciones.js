@@ -279,3 +279,42 @@ function validarCorreo(elemento) {
         document.getElementById('mensajeCorreo').innerHTML = ''
     }
 }
+
+function validarContra(elemento) {
+    document.getElementById('mensajeContra').innerHTML = ''
+    if (elemento.value.length > 7) {
+        document.getElementById('mensajeContra').innerHTML = ''
+        var miAscii = elemento.value.charCodeAt(elemento.value.length - 1)
+        console.log(miAscii)
+
+        if (elemento.value.indexOf('@') == -1 && elemento.value.indexOf('_') == -1 && elemento.value.indexOf('$') == -1) {
+
+            document.getElementById('mensajeContra').innerHTML = '<br> La contraseña debe contener almenos uno de estos tres caracteres (@,_,$)'
+            return false
+
+        } else {
+            var min = 0
+            var may = 0
+            for (var i = 0; i <= elemento.value.length; i++) {
+                if (elemento.value.charCodeAt(i) >= 97 && elemento.value.charCodeAt(i) <= 122) {
+                    may++
+
+                } else if (elemento.value.charCodeAt(i) >= 65 && elemento.value.charCodeAt(i) <= 90) {
+                    min++
+                }
+            }
+
+            if (min > 0 && may > 0) {
+                document.getElementById('mensajeContra').innerHTML = ''
+                return true
+            } else {
+                document.getElementById('mensajeContra').innerHTML = '<br> La contraseña debe tener mayusculas y minusculas'
+                return false
+            }
+
+        }
+    } else {
+        document.getElementById('mensajeContra').innerHTML = '<br> La contraseña debe tener como minimo 8 caracteres'
+        return false
+    }
+}
