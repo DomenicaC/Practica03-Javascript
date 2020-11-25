@@ -256,3 +256,26 @@ function validarFecha(elemento) {
     }
 
 }
+
+function validarCorreo(elemento) {
+    if (elemento.value.length > 2) {
+        document.getElementById('mensajeCorreo').innerHTML = ''
+        var pos = elemento.value.indexOf('@')
+        if (pos != -1) {
+            var cor = elemento.value.substring(pos + 1, elemento.value.length)
+
+            if ((cor == 'est.ups.edu.ec') || (cor == 'ups.edu.ec')) {
+                return true
+            } else {
+                document.getElementById('mensajeCorreo').innerHTML = '<br>extenciones permitidas (ups.edu.ec, est.ups.edu.ec)'
+            }
+        } else {
+            document.getElementById('mensajeCorreo').innerHTML = '<br>correo invalido falta el @'
+        }
+    } else {
+        document.getElementById('mensajeCorreo').innerHTML = '<br>correo invalido'
+    }
+    if (elemento.value.length == 0) {
+        document.getElementById('mensajeCorreo').innerHTML = ''
+    }
+}
