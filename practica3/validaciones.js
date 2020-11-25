@@ -210,3 +210,49 @@ function validarTelefono(elemento) {
         return false
     }
 }
+
+function validarFecha(elemento) {
+    if (elemento.value.length == 10) {
+        document.getElementById('mensajeFechaNac').innerHTML = ''
+        //console.log(elemento.value.charCodeAt(elemento.value.length-1))
+        if (elemento.value.charCodeAt(2) == 47 && elemento.value.charCodeAt(5) == 47) {
+            var dd = parseInt(elemento.value.substring(0, 2))
+            var MM = parseInt(elemento.value.substring(3, 5))
+            var yyyy = parseInt(elemento.value.substring(6, 10))
+
+            if (MM < 13 && MM > 0) {
+
+                if ((MM == 01) || (MM == 03) || (MM == 05) || (MM == 07) || (MM == 09) || (MM == 11)) {
+                    if (dd > 31 || dd < 1) {
+                        document.getElementById('mensajeFechaNac').innerHTML = '<br> El dia que ingreso no existe en el mes indicado'
+                    }
+                } else {
+                    if (MM == 02) {
+                        if (dd > 29 || dd < 1) {
+                            document.getElementById('mensajeFechaNac').innerHTML = '<br> El dia que ingreso no existe en el mes indicado'
+                        }
+                    } else {
+                        if (dd > 30 || dd < 1) {
+                            document.getElementById('mensajeFechaNac').innerHTML = '<br> El dia que ingreso no existe en el mes indicado'
+                        }
+                    }
+                }
+
+                if (yyyy > 2020 || yyyy < 1900) {
+                    document.getElementById('mensajeFechaNac').innerHTML = '<br> El año insgresado no existe'
+                }
+            } else {
+                document.getElementById('mensajeFechaNac').innerHTML = '<br> El mes ingresado no existe'
+            }
+        } else {
+            document.getElementById('mensajeFechaNac').innerHTML = '<br> La fecha ingresada es invalida (dd/MM/yyyy)'
+        }
+    } else {
+        document.getElementById('mensajeFechaNac').innerHTML = '<br> La fecha ingresada es invalida (dd/MM/yyyy)'
+    }
+
+    if (elemento.value.length == 0) {
+        document.getElementById('mensajeFechaNac').innerHTML = ''
+    }
+
+}
