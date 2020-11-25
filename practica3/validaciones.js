@@ -123,3 +123,36 @@ function valCedula(ced) {
     return true
 }
 
+function validarNombres(elemento) {
+    document.getElementById('mensajeNombres').innerHTML = ''
+    if (elemento.value.length > 0) {
+        document.getElementById('mensajeNombres').innerHTML = ''
+        var miAscii = elemento.value.charCodeAt(elemento.value.length - 1)
+        console.log(miAscii)
+        var espacio1 = elemento.value.indexOf(' ')
+        var j = 0
+        if (miAscii >= 97 && miAscii <= 122 || miAscii >= 65 && miAscii <= 90 || miAscii == 32) {
+            if (espacio1 != -1) {
+                if (miAscii != 32) {
+                    j = j + 1
+                    console.log("j " + j)
+                    if (j <= 1) {
+                        return true
+                    }
+                } else {
+                    document.getElementById('mensajeNombres').innerHTML = '<br>El campo debe contener dos nombres'
+                    return false
+                }
+            } else {
+                document.getElementById('mensajeNombres').innerHTML = '<br>El campo debe contener dos nombres'
+                return false
+            }
+        } else {
+            elemento.value = elemento.value.substring(0, elemento.value.length - 1)
+            document.getElementById('mensajeNombres').innerHTML = '<br>El campo nombres debe contener solo letras'
+            return false
+        }
+    } else {
+        return false
+    }
+}
